@@ -1,46 +1,33 @@
-function addRow(table, taskText, categText) {
-  let row = document.createElement("tr")
-  let completed = document.createElement("td")
-  let completedCheckbox = document.createElement("input")
-  let task = document.createElement("td")
-  let category = document.createElement("td")
+function addTodo(list, taskText) {
+  let li = document.createElement("li")
+  // let completedCheckbox = document.createElement("input")
+  let task = document.createElement("span")
 
-  completedCheckbox.type = "checkbox";
+  // completedCheckbox.type = "checkbox";
   task.innerText = taskText;
-  category.innerText = categText;
-  completed.appendChild(completedCheckbox);
-  row.appendChild(completed);
-  row.appendChild(task);
-  row.appendChild(category);
-  table.appendChild(row)
+  li.appendChild(task);
+  // li.appendChild(completedCheckbox);
+  list.appendChild(li)
 }
 
 function addToDo() {
   let taskText = document.getElementById('add-task').value;
-  let categText = document.getElementById('add-category').value;
-  let table = document.getElementById('todo-table');
+  let list = document.getElementById('todo-list');
   
-  if(categText.length !== 0 && taskText.length !== 0)
-    addRow(table, taskText, categText);
+  if(taskText.length !== 0)
+    addTodo(list, taskText);
 
   document.getElementById('add-task').value = ''
-  document.getElementById('add-category').value = '';
 }
 
 function removeRow(e) {
-  console.log(e.target.parentElement.id);
-  let rowParent = e.target.parentElement;
-  let toDos = rowParent.parentElement;
+  console.log(e.target.tagName)
+  let li = e.target.parentElement;
+  let list = li.parentElement;
 
-  if(rowParent.tagName === "TR" && rowParent.id !== 'labels' && rowParent.id !== 'inputs') {
-    if(neverDeleted) {
-      if(confirm('Double clicking a row deletes.\nProceed?')) {
-        neverDeleted = false;
-        toDos.removeChild(rowParent);
-      }
-      return;
-    }
-    toDos.removeChild(rowParent);
+  if(e.target.tagName === "SPAN") {
+    li.style.textDecoration = "line-through"
+    setTimeout(() => list.removeChild(li), 1000)
   }
 }
 
@@ -48,9 +35,7 @@ function markAsComplete() {
 
 }
 
-let neverDeleted = true;
-
 let addButton = document.getElementById('add-button');
 addButton.addEventListener('click', addToDo);
-let table = document.getElementById('todo-table');
-table.addEventListener("dblclick", removeRow)
+let list = document.getElementById('todo-list');
+list.addEventListener("click", removeRow)
