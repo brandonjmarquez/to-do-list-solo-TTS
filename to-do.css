@@ -8,3 +8,6 @@ tfoot {
     background-color: #333;
     color: #fff;
 }
+table:hover {
+    opacity: blue .5;
+}

@@ -8,26 +8,27 @@
     <link rel="stylesheet" href="to-do.css">
 </head>
 <body>
-    <h1>Todo List</h1>
-    <input type="text" id="input-task">
-    <ul id="task-list">
-    
-
-    </ul>
-    <table>
+    <!-- <h1>Todo List</h1> -->
+    <table id="todo-table">
       <thead>
           <tr>
               <th colspan="3">To Do List</th>
           </tr>
       </thead>
       <tbody>
-          <tr>
+          <tr id="labels">
               <td>Completed</td>
               <td>Task</td>
               <td>Category</td>
           </tr>
+          <tr id="inputs">
+              <td><button id="add-button">Add Task</button></td>
+              <td><input type="text" id="add-task"></td>
+              <td><input type="text" id="add-category"></td>
+          </tr>
       </tbody>
   </table>
+  
     <script src="todolist.js"></script>
 </body>
 </html>
